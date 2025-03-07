@@ -1,4 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import VueTypedJs from 'vue-typed-js'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+app.use(VueTypedJs)
+app.mount('#app')
