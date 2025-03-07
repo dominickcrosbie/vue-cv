@@ -4,5 +4,12 @@ module.exports = defineConfig({
     ? '/vue-cv/'
     : '/',
   outputDir: 'dist',
-  transpileDependencies: true
+  transpileDependencies: true,
+  configureWebpack: {
+    optimization: {
+      splitChunks: {
+        chunks: 'all'
+      }
+    }
+  }
 })

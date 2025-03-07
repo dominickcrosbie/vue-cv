@@ -46,9 +46,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.chat-introduction {
-  // margin: 2rem 0;
-}
+// .chat-introduction {
+//   // margin: 2rem 0;
+// }
 
 .terminal {
   background-color: #1E1E1E;
