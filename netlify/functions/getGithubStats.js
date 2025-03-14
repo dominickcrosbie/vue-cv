@@ -1,12 +1,21 @@
 const fetch = require('cross-fetch')
 
+// List of allowed origins
+const allowedOrigins = [
+  'https://domcrosbie.com',
+  'https://vue-cv-dom.netlify.app'
+];
+
 exports.handler = async function(event, context) {
+  const origin = event.headers.origin || '';
+  const allowedOrigin = allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
+
   // Handle preflight requests
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "https://domcrosbie.com",
+        "Access-Control-Allow-Origin": allowedOrigin,
         "Access-Control-Allow-Methods": "GET",
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
         "Access-Control-Max-Age": "86400"
@@ -21,7 +30,7 @@ exports.handler = async function(event, context) {
     return {
       statusCode: 500,
       headers: {
-        "Access-Control-Allow-Origin": "https://domcrosbie.com",
+        "Access-Control-Allow-Origin": allowedOrigin,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ error: 'Required environment variables are not set' })
@@ -91,7 +100,7 @@ exports.handler = async function(event, context) {
       return {
         statusCode: 404,
         headers: {
-          "Access-Control-Allow-Origin": "https://domcrosbie.com",
+          "Access-Control-Allow-Origin": allowedOrigin,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({ error: 'No commit data found for any repositories' })
@@ -101,7 +110,7 @@ exports.handler = async function(event, context) {
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "https://domcrosbie.com",
+        "Access-Control-Allow-Origin": allowedOrigin,
         "Content-Type": "application/json"
       },
       body: JSON.stringify(repoStats)
@@ -112,7 +121,7 @@ exports.handler = async function(event, context) {
     return {
       statusCode: 500,
       headers: {
-        "Access-Control-Allow-Origin": "https://domcrosbie.com",
+        "Access-Control-Allow-Origin": allowedOrigin,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ error: 'Failed to fetch commit data' })
