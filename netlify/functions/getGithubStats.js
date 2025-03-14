@@ -6,7 +6,7 @@ exports.handler = async function(event, context) {
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "https://vue-cv-dom.netlify.app/.netlify/functions/getGithubStats", // Update this with your GitHub Pages domain in production
+        "Access-Control-Allow-Origin": "https://domcrosbie.com",
         "Access-Control-Allow-Methods": "GET",
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
         "Access-Control-Max-Age": "86400"
@@ -21,7 +21,7 @@ exports.handler = async function(event, context) {
     return {
       statusCode: 500,
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "https://domcrosbie.com",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ error: 'Required environment variables are not set' })
@@ -91,7 +91,7 @@ exports.handler = async function(event, context) {
       return {
         statusCode: 404,
         headers: {
-          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Origin": "https://domcrosbie.com",
           "Content-Type": "application/json"
         },
         body: JSON.stringify({ error: 'No commit data found for any repositories' })
@@ -101,7 +101,7 @@ exports.handler = async function(event, context) {
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "https://domcrosbie.com",
         "Content-Type": "application/json"
       },
       body: JSON.stringify(repoStats)
@@ -112,7 +112,7 @@ exports.handler = async function(event, context) {
     return {
       statusCode: 500,
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "https://domcrosbie.com",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ error: 'Failed to fetch commit data' })
