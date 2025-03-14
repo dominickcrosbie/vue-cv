@@ -184,7 +184,7 @@ export default {
         this.loading = true;
         
         // Use the Netlify URL since that's where the function is hosted
-        const response = await fetch(`${process.env.VUE_APP_API_URL}/.netlify/functions/getGithubStats`, {
+        const response = await fetch('https://vue-cv-dom.netlify.app/.netlify/functions/getGithubStats', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
