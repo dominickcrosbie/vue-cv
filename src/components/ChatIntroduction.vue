@@ -13,26 +13,22 @@
         <div class="typing-animation">
           <span class="prompt">$ </span>
           <span class="command">name</span>
-          <div class="response">Your Name</div>
+          <div class="response" v-html="typedTexts[0]"></div>
         </div>
         <div class="typing-animation delay-1">
           <span class="prompt">$ </span>
           <span class="command">title</span>
-          <div class="response">Full Stack .Net Developer / AI Engineer</div>
+          <div class="response" v-html="typedTexts[1]"></div>
         </div>
         <div class="typing-animation delay-2">
           <span class="prompt">$ </span>
           <span class="command">description</span>
-          <div class="response">5.5 years of experience in a Start-up environment, shipping results quickly and efficiently.</div>
+          <div class="response" v-html="typedTexts[2]"></div>
         </div>
         <div class="typing-animation delay-3">
           <span class="prompt">$ </span>
           <span class="command">current_work</span>
-          <div class="response">Building an autonomous AI agent using Open AI and Semantic Hybrid search</div>
-        </div>
-        <div class="cursor-line">
-          <span class="prompt">$ </span>
-          <span class="cursor"></span>
+          <div class="response" v-html="typedTexts[3]"></div>
         </div>
       </div>
     </div>
@@ -41,15 +37,50 @@
 
 <script>
 export default {
-  name: 'ChatIntroduction'
+  name: 'ChatIntroduction',
+  data() {
+    return {
+      responses: [
+        'Dom Crosbie',
+        'Full Stack .Net Developer / AI Engineer',
+        '5.5 years of experience in a Start-up environment, shipping results quickly and efficiently.',
+        'Building an autonomous AI agent using Open AI and Semantic Hybrid search'
+      ],
+      typedTexts: ['', '', '', ''],
+      typingSpeed: 30,
+      initialDelay: 300,
+      completedResponses: 0
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.typeText(this.responses[0], 0);
+    }, this.initialDelay);
+  },
+  methods: {
+    typeText(text, index) {
+      let currentChar = 0;
+      const typeInterval = setInterval(() => {
+        if (currentChar < text.length) {
+          this.typedTexts[index] += text.charAt(currentChar);
+          currentChar++;
+        } else {
+          clearInterval(typeInterval);
+          this.completedResponses++;
+          
+          if (index < this.responses.length - 1) {
+            setTimeout(() => {
+              this.typeText(this.responses[index + 1], index + 1);
+            }, 300);
+          }
+        }
+      }, this.typingSpeed);
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
-// .chat-introduction {
-//   // margin: 2rem 0;
-// }
-
 .terminal {
   background-color: #1E1E1E;
   border-radius: var(--border-radius);
@@ -135,6 +166,7 @@ export default {
   color: white;
   margin-top: 0.2rem;
   margin-left: 1rem;
+  min-height: 1.6em;
 }
 
 .cursor-line {

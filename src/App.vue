@@ -5,13 +5,19 @@
       <h2>Dom Crosbie</h2>
       <headshot class="headshot">
           <img src="./assets/Dom.jpeg" alt="Headshot">
-        </headshot>      
+      </headshot>      
       <div class="sections">
-
-        <github-projects />
-        <chat-introduction />
+        <github-projects class="fixed-height-component" />
+        <chat-introduction class="fixed-height-component" />
+        <div class="button-container">
+          <a href="mailto:domcrosbie22@gmail.com" target="_blank">
+            <button class="contact-button email">Contact Me</button>
+          </a>
+          <a href="https://www.linkedin.com/in/dominick-crosbie-93990992/" target="_blank">
+            <button class="contact-button linkedin">LinkedIn</button>
+          </a>
+        </div>
         <about-me />
-
       </div>
     </div>
   </div>
@@ -30,7 +36,6 @@ export default {
     AboutMe,
     GithubProjects,
     ChatIntroduction
-
   }
 }
 </script>
@@ -41,6 +46,7 @@ export default {
   --secondary-color: #42b983;
   --text-color: #ffffff;
   --background-color: #1a1a1a;
+  --border-radius: 8px;
 }
 
 * {
@@ -61,13 +67,15 @@ body {
 .app {
   min-height: 100vh;
   position: relative;
+  min-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
 .content {
   position: relative;
   z-index: 1;
-  padding: 2rem;
-  max-width: 1200px;
+  max-width: 1350px;
   margin: 0 auto;
 }
 
@@ -84,6 +92,67 @@ h2 {
   gap: 2rem;
 }
 
+.fixed-height-component {
+  height: 400px;
+  overflow-y: auto;
+  /* Add custom scrollbar */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+
+.button-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.contact-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  &.email {
+    background: linear-gradient(45deg, rgba(142, 84, 233, 0.2), rgba(71, 118, 230, 0.2));
+    &:hover {
+      background: linear-gradient(45deg, rgba(142, 84, 233, 0.3), rgba(71, 118, 230, 0.3));
+    }
+  }
+
+  &.linkedin {
+    background: linear-gradient(45deg, rgba(71, 118, 230, 0.2), rgba(66, 185, 131, 0.2));
+    &:hover {
+      background: linear-gradient(45deg, rgba(71, 118, 230, 0.3), rgba(66, 185, 131, 0.3));
+    }
+  }
+}
+
 .headshot {
   display: grid;
   justify-self: center;
@@ -91,22 +160,37 @@ h2 {
   height: 220px;
   position: relative;
   overflow: hidden;
-  border-radius: 50%; /* Perfectly rounded */
+  border-radius: 50%;
   background: linear-gradient(to bottom, rgba(142, 84, 233, 0.2), rgba(71, 118, 230, 0.2));
-  padding: 4px; /* Creates a border effect */
+  padding: 4px;
 }
 
 .headshot img {
   width: 100%;
   height: 220px;
-  object-fit: cover; /* This maintains aspect ratio while filling the container */
-  object-position: center 0%; /* This focuses on the top half (adjust percentage as needed) */
+  object-fit: cover;
+  object-position: center 0%;
   border-radius: 50%;
 }
 
 @media (min-width: 768px) {
   .sections {
     grid-template-columns: 1fr 1fr;
+  }
+  
+  .button-container {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .fixed-height-component {
+    height: 300px;
+  }
+  
+  .contact-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
   }
 }
 </style>
