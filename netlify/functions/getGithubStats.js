@@ -6,7 +6,7 @@ exports.handler = async function(event, context) {
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "https://domcrosbie.com", // Update this with your GitHub Pages domain in production
+        "Access-Control-Allow-Origin": "https://vue-cv-dom.netlify.app/.netlify/functions/getGithubStats", // Update this with your GitHub Pages domain in production
         "Access-Control-Allow-Methods": "GET",
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
         "Access-Control-Max-Age": "86400"
