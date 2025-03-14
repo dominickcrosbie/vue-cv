@@ -3,7 +3,7 @@ const fetch = require('cross-fetch')
 // List of allowed origins
 const allowedOrigins = [
   'https://domcrosbie.com',
-  'https://vue-cv-dom.netlify.app'
+  'https://vue-cv.netlify.app'
 ];
 
 exports.handler = async function(event, context) {
